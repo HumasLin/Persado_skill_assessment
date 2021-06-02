@@ -20,7 +20,7 @@ Since it's not successful to filter out posts about products so far, the product
 | post_id | product_id | brand | product_name | price | details |
 |---------|------------|-------|--------------|-------|---------| 
 
-Between these two tables, the foreign key that connects them is `posts.id->product.post_id`, and the primary key for each post in the database is `posts.id` and `product.product_id`
+Between these two tables, the foreign key that connects them is `posts.id->product.post_id`, and the primary key for each post in the database is `posts.id` and `product.product_id`. The SQL file schema is also stored in `data` folder for reference.
 
 In this package, the previously scraped data are stored as the data source for web application to run without scraping.
 
