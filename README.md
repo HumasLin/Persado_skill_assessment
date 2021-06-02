@@ -59,6 +59,6 @@ Please make sure it's run with Google Chrome or Safari browser, it usually looks
 ```
 bash run.sh <depth> <location_of_chrome_webdriver>
 ```
-And the program can run automatically, starting with main.py, and then app.py.
+The two arguments are same as the above. And the program can run automatically, starting with `main.py`, and then `app.py`.
 
 *P.S.: python3 can be replaced by python if necessary*
