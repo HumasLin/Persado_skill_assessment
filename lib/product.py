@@ -29,6 +29,7 @@ class Product:
 
 		details_module = self.browser.find_element_by_xpath("//div[@class='dati1w0a qt6c0cv9 hv4rvrfc jb3vyjys']")
 		self.details = details_module.text.lstrip("Details ")
+	
 	def get_data(self):
 		return [self.post_id, self.product_id, self.brand, self.product_name, self.price, self.details]
 		
