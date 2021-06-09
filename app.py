@@ -23,9 +23,7 @@ from dash.dependencies import Input, Output
 from nltk.corpus import stopwords
 nltk.download('stopwords')
 
-from lib.data import *
 from lib.utils import *
-from lib.scraper import *
 from lib.analysis import *
 
 server = flask.Flask('app')
@@ -60,7 +58,6 @@ dataframes_product={'SKECHERS':df_product_1,
 
 doc1 = [clean(str(text)) for text in list(df_post_1['text']) if clean(str(text))!='nan']
 doc2 = [clean(str(text)) for text in list(df_post_2['text']) if clean(str(text))!='nan']
-
 @app.callback(dd.Output('image_wc_1', 'src'), [dd.Input('image_wc_1', 'id')])
 def make_image(b):
     img = BytesIO()
@@ -196,24 +193,22 @@ app.layout = dbc.Row(
                 dbc.Col(md=5,children=[
                     dbc.Row([
                         html.H2("Comparison",style={'height': '100%','width': '100%',
-                                                             'margin-left':'25px',
                                                              'margin-top':'25px',
                                                              'textAlign':'center'}),
                         html.H3("WordCloud",style={'height': '100%','width': '100%',
-                                                             'margin-left':'25px',
                                                              'margin-top':'25px',
                                                              'textAlign':'center'},className='divBorder'),])]),
 
                 dbc.Col(md=5,children=[
                     dbc.Row([
-                        html.H4("SKECHERS WordCloud",style={'height': '100%','width': '100%',
-                                                             'padding':'25px','textAlign':'center'}),
+                        html.H4("SKECHERS WordCloud",style={'height': '100%','width': '100%','textAlign':'center',
+                                                             'margin-left':'25px','margin-right':'25px'}),
                         html.Img(id="image_wc_1",style={'height': '100%','width': '100%',
                                                       'margin-left':'25px','margin-right':'25px'})],
                         style={'width':'45%','display': 'inline-block'}),
                     dbc.Row([
-                        html.H4("ASICS WordCloud",style={'height': '100%','width': '100%','margin-left':'75px',
-                                                          'padding':'25px','textAlign':'center'}),
+                        html.H4("ASICS WordCloud",style={'height': '100%','width': '100%','textAlign':'center',
+                                                          'margin-left':'100px','margin-right':'25px'}),
                         html.Img(id="image_wc_2",style={'height': '100%','width': '100%',
                                                        'margin-left':'100px','margin-right':'25px'})],
                         style={'width':'45%','display': 'inline-block'})   
@@ -225,12 +220,10 @@ app.layout = dbc.Row(
                 dbc.Col(md=5,children=[
                     html.H4("According to results from TfidfVectorizer, the 10 words SKECHERS uses most frequently\
                         in their posts are:",style={'padding':'5px'}),
-                    html.H4("['skechers', 'skechersstyle', 'style', 'comfort', 'fashion',\
-                        'streetstyle', 'mens', 'shoes', 'sneakers', 'love']",style={'padding':'5px'}),
+                    html.H4("{}".format(get_tfidf_top_features(doc1)),style={'padding':'5px'}),
                     html.H4("But for ASICS, the 10 words they use most frequently\
                         in their posts are:",style={'padding':'5px'}),
-                    html.H4("['run', 'long', 'win', 'new', 'shop', 'running', 'shoe',\
-                       'collection', 'asics', 'gel']",style={'padding':'5px'}),
+                    html.H4("{}".format(get_tfidf_top_features(doc2)),style={'padding':'5px'}),
                     html.H4("Combined with the WordCloud, based on the word usage, the difference between how\
                         these two companies promote their products are easy to tell.",style={'padding':'5px'}),
                 ],style={'width':'100%','textAlign':'center'})
